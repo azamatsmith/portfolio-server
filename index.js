@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
   getBooks(result => res.json(result));
 })
 
-app.listen(3001, function () {
-  console.log('tw-portfolio app listening on port 3001')
+app.listen(3000, function () {
+  console.log('tw-portfolio app listening on port 3000')
 })
 
