@@ -44,8 +44,7 @@ const getBooks = (callback = null) => {
         return false;
       });
 
-      // console.log('audible tag', tweets);
-       textSearch = textSearch
+      textSearch = textSearch
         .concat(audibleTag)
         .concat(bookTag)
         .concat(readingTag)
@@ -68,18 +67,18 @@ const getBooks = (callback = null) => {
 };
 
 const getImage = (link = null, callback = null) => {
-  if (!link ) {
-    return callback({ error: 'must provide a link' });
+  if (!link) {
+    return callback({error: 'must provide a link'});
   }
 
   fetch(link)
     .then(res => res.text())
     .then(text => {
-      const $ = cheerio.load(text)
+      const $ = cheerio.load(text);
       const image = $('meta[property="og:image"]').attr('content');
       callback(image);
     })
     .catch(error => callback({error}));
-}
+};
 
 module.exports = {getBooks, getImage};
