@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Books = require('./Books');
+const books = require('./Books');
 const app = express();
+const Books = new books();
 
 const port = process.env.PORT || 3005;
 
