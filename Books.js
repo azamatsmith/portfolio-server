@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+const cheerio = require('cheerio');
 require('dotenv').config();
 
 const Twitter = require('twitter');
@@ -65,4 +67,19 @@ const getBooks = (callback = null) => {
   });
 };
 
-module.exports = getBooks;
+const getImage = (link = null, callback = null) => {
+  if (!link ) {
+    return callback({ error: 'must provide a link' });
+  }
+
+  fetch(link)
+    .then(res => res.text())
+    .then(text => {
+      const $ = cheerio.load(text)
+      const image = $('meta[property="og:image"]').attr('content');
+      callback(image);
+    })
+    .catch(error => callback({error}));
+}
+
+module.exports = {getBooks, getImage};

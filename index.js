@@ -1,8 +1,12 @@
 const express = require('express')
-const getBooks = require('./Books');
+const bodyParser = require('body-parser');
+const Books = require('./Books');
 const app = express()
 
 const port = process.env.PORT || 3005;
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // ALLOW CORS
 app.use((req, res, next) => {
@@ -11,9 +15,13 @@ app.use((req, res, next) => {
   next();
 });
 
+app.post('/getImage', (req, res) => {
+  Books.getImage(req.body.link);
+  res.send('hi');
+})
 
 app.get('/', (req, res) => {
-  getBooks(result => res.json(result));
+  Books.getBooks(result => res.json(result));
 })
 
 app.listen(port, () => {
