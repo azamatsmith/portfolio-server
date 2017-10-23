@@ -16,8 +16,7 @@ app.use((req, res, next) => {
 });
 
 app.post('/getImage', (req, res) => {
-  Books.getImage(req.body.link);
-  res.send('hi');
+  Books.getImage(req.body.link, link => res.json({link}));
 })
 
 app.get('/', (req, res) => {
