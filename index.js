@@ -9,6 +9,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log('tw-portfolio app listening on port 3005')
+  console.log('tw-portfolio app listening on port ', port)
 })
 
