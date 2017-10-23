@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
   getBooks(result => res.json(result));
 })
 
-app.listen(3005, function () {
-  console.log('Example app listening on port 3005!')
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
 })
 
