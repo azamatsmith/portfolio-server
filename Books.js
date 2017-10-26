@@ -77,9 +77,7 @@ class Books {
       return callback({error: 'must provide a link'});
     }
 
-    const config = {follow: 1000};
-
-    fetch(link, config)
+    fetch(link)
       .then(res => res.text())
       .then(text => {
         const $ = cheerio.load(text);
