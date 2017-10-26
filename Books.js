@@ -81,11 +81,9 @@ class Books {
     const string =
       'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1';
 
-    const headers = new Headers({
-      // "Accept"       : "application/json",
-      // "Content-Type" : "application/json",
+    const headers = {
       'User-Agent': string,
-    });
+    };
 
     fetch(link, {headers})
       .then(response => response.text())
