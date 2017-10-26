@@ -72,9 +72,10 @@ class Books {
     );
   }
 
-  getImage(link = null, callback = null) {
+  getImage(link = null, res = null) {
     if (!link) {
-      return callback({error: 'must provide a link'});
+      res.status(500);
+      return res({error: 'must provide a link'});
     }
 
     fetch(link)
@@ -82,9 +83,12 @@ class Books {
       .then(text => {
         const $ = cheerio.load(text);
         const image = $('meta[property="og:image"]').attr('content');
-        callback(image);
+        res.json({link: image});
       })
-      .catch(error => callback({error}));
+      .catch(error => {
+        res.status(500);
+        res.json({error});
+      });
   }
 
   // PRIVATE

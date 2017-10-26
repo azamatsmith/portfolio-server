@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 });
 
 app.post('/getImage', (req, res) => {
-  Books.getImage(req.body.link, link => res.json({link}));
+  Books.getImage(req.body.link, res);
 });
 
 app.get('/', (req, res) => {
