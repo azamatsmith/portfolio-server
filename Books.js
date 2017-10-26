@@ -78,7 +78,13 @@ class Books {
       return res({error: 'must provide a link'});
     }
 
-    fetch(link)
+    let headers = new Headers({
+      // "Accept"       : "application/json",
+      // "Content-Type" : "application/json",
+      'User-Agent': 'Chrome:',
+    });
+
+    fetch(link, {headers})
       .then(res => res.text())
       .then(text => {
         const $ = cheerio.load(text);
