@@ -77,7 +77,7 @@ class Books {
       return callback({error: 'must provide a link'});
     }
 
-    const config = {follow: 50};
+    const config = {follow: 1000};
 
     fetch(link, config)
       .then(res => res.text())
