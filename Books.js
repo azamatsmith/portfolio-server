@@ -88,13 +88,15 @@ class Books {
     });
 
     fetch(link, {headers})
-      .then(res => res.text())
+      .then(response => response.text())
       .then(text => {
         const $ = cheerio.load(text);
         const image = $('meta[property="og:image"]').attr('content');
+        console.log('got image!', image);
         res.json({link: image});
       })
       .catch(error => {
+        console.log('got error: ', error);
         res.status(500);
         res.json({error});
       });

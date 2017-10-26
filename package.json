@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deploy": "git push heroku master",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node ."
   },
   "author": "",
@@ -19,9 +19,15 @@
     "twitter": "^1.7.1"
   },
   "devDependencies": {
+    "jest": "^21.2.1",
+    "jest-fetch-mock": "^1.2.1",
     "prettier": "^1.6.1"
   },
   "engines": {
     "node": "8.x"
+  },
+  "jest": {
+    "automock": false,
+    "setupFiles": ["./setupJest.js"]
   }
 }
