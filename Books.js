@@ -5,7 +5,7 @@ require('dotenv').config();
 
 class Books {
   constructor() {
-    this.params = {screen_name: 'azamatsmith'};
+    this.params = { count: 200, screen_name: 'azamatsmith' };
     this.client = new Twitter({
       consumer_key: process.env.CONSUMER_API_KEY,
       consumer_secret: process.env.CONSUMER_API_SECRET,
@@ -25,8 +25,10 @@ class Books {
       this.params,
       (error, tweets, response) => {
         if (error) {
-          return {error};
+          console.error(error);
+          return { error };
         }
+
         let textSearch = tweets.filter(tweet =>
           tweet.text.toLowerCase().match('finished listening to'),
         );
@@ -75,30 +77,28 @@ class Books {
   getImage(link = null, res = null) {
     if (!link) {
       res.status(500);
-      return res({error: 'must provide a link'});
+      return res({ error: 'must provide a link' });
     }
 
     const string =
       'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1';
 
-    const headers = new Headers({
-      // "Accept"       : "application/json",
-      // "Content-Type" : "application/json",
+    const headers = {
       'User-Agent': string,
-    });
+    };
 
-    fetch(link, {headers})
+    fetch(link, { headers })
       .then(response => response.text())
       .then(text => {
         const $ = cheerio.load(text);
         const image = $('meta[property="og:image"]').attr('content');
         console.log('got image!', image);
-        res.json({link: image});
+        res.json({ link: image });
       })
       .catch(error => {
         console.log('got error: ', error);
         res.status(500);
-        res.json({error});
+        res.json({ error });
       });
   }
 
@@ -107,7 +107,7 @@ class Books {
   _filterTweets(arr = []) {
     return arr
       .map(tweet => {
-        const {created_at, entities, id, text} = tweet;
+        const { created_at, entities, id, text } = tweet;
         return {
           created_at,
           id,
